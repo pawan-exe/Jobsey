@@ -11,9 +11,6 @@ const stripe = require("stripe")(
   "sk_test_51PQq37P85SOipBLVqtG7CerRS6JCjSH5xYlNLVzEIu1eVcF8UIgDERQMiu8vOjK5hJ8RhknyfrmiSx2G1ZHBymUH00kPlEUDmZ"
 );
 
-const baseUrl =
-  process.env.URL || (typeof window !== "undefined" && window.location.origin);
-
 // create profile action
 
 export async function createProfileAction(formData, pathToRevalidate) {
@@ -193,8 +190,8 @@ export async function createStripePaymentAction(data) {
     payment_method_types: ["card"],
     line_items: data?.lineItems,
     mode: "subscription",
-    success_url: `${baseUrl}/membership` + "?status=success",
-    cancel_url: `${baseUrl}/membership` + "?status=cancel",
+    success_url: `${process.env.URL}/membership` + "?status=success",
+    cancel_url: `${process.env.URL}/membership` + "?status=cancel",
   });
 
   return {
