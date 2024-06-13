@@ -62,12 +62,17 @@ function Header({ user, profileInfo }) {
     <div>
       <header className="flex h-16 w-full shrink-0 items-center">
         <Sheet>
-          <SheetTrigger asChild>
-            <Button className="lg:hidden">
-              <AlignJustify className="h-6 w-6" />
-              <span className="sr-only">Toggle Navigation Menu</span>
-            </Button>
-          </SheetTrigger>
+          <div className="flex items-center justify-between lg:hidden w-full px-3">
+            <Link className=" font-bold text-3xl " href={"/"}>
+              JOBSEY
+            </Link>
+            <SheetTrigger asChild>
+              <Button className="">
+                <AlignJustify className="h-6 w-6" />
+                <span className="sr-only">Toggle Navigation Menu</span>
+              </Button>
+            </SheetTrigger>
+          </div>
           <SheetContent side="left">
             <Link className="mr-6 hidden lg:flex" href={"#"}>
               <h3>JOBSEY</h3>

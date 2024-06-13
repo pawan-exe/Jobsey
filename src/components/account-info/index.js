@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import CommonForm from "../common-form";
 import { updateProfileAction } from "@/actions";
+import { useToast } from "../ui/use-toast";
 
 function AccountInfo({ profileInfo }) {
   const [candidateFormData, setCandidateFormData] = useState(
@@ -17,6 +18,8 @@ function AccountInfo({ profileInfo }) {
   const [recruiterFormData, setRecruiterFormData] = useState(
     initialRecruiterFormData
   );
+
+  const { toast } = useToast();
 
   useEffect(() => {
     if (profileInfo?.role === "recruiter")
@@ -27,37 +30,51 @@ function AccountInfo({ profileInfo }) {
   }, [profileInfo]);
 
   async function handleUpdateAccount() {
-    await updateProfileAction(
-      profileInfo?.role === "candidate"
-        ? {
-            _id: profileInfo?._id,
-            userId: profileInfo?.userId,
-            email: profileInfo?.email,
-            role: profileInfo?.role,
-            isPremiumUser: profileInfo?.isPremiumUser,
-            memberShipType: profileInfo?.memberShipType,
-            memberShipStartDate: profileInfo?.memberShipStartDate,
-            memberShipEndDate: profileInfo?.memberShipEndDate,
-            candidateInfo: {
-              ...candidateFormData,
-              resume: profileInfo?.candidateInfo?.resume,
+    try {
+      await updateProfileAction(
+        profileInfo?.role === "candidate"
+          ? {
+              _id: profileInfo?._id,
+              userId: profileInfo?.userId,
+              email: profileInfo?.email,
+              role: profileInfo?.role,
+              isPremiumUser: profileInfo?.isPremiumUser,
+              memberShipType: profileInfo?.memberShipType,
+              memberShipStartDate: profileInfo?.memberShipStartDate,
+              memberShipEndDate: profileInfo?.memberShipEndDate,
+              candidateInfo: {
+                ...candidateFormData,
+                resume: profileInfo?.candidateInfo?.resume,
+              },
+            }
+          : {
+              _id: profileInfo?._id,
+              userId: profileInfo?.userId,
+              email: profileInfo?.email,
+              role: profileInfo?.role,
+              isPremiumUser: profileInfo?.isPremiumUser,
+              memberShipType: profileInfo?.memberShipType,
+              memberShipStartDate: profileInfo?.memberShipStartDate,
+              memberShipEndDate: profileInfo?.memberShipEndDate,
+              recruiterInfo: {
+                ...recruiterFormData,
+              },
             },
-          }
-        : {
-            _id: profileInfo?._id,
-            userId: profileInfo?.userId,
-            email: profileInfo?.email,
-            role: profileInfo?.role,
-            isPremiumUser: profileInfo?.isPremiumUser,
-            memberShipType: profileInfo?.memberShipType,
-            memberShipStartDate: profileInfo?.memberShipStartDate,
-            memberShipEndDate: profileInfo?.memberShipEndDate,
-            recruiterInfo: {
-              ...recruiterFormData,
-            },
-          },
-      "/account"
-    );
+        "/account"
+      );
+      toast({
+        variant: "success",
+        title: "Profile updated successfully",
+        className: "bg-green-500 text-white",
+        duration: 3000,
+      });
+    } catch (e) {
+      toast({
+        variant: "destructive",
+        title: "Profile update failed",
+        duration: 3000,
+      });
+    }
   }
 
   return (

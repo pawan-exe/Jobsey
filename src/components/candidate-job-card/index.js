@@ -69,6 +69,13 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications }) {
       "/jobs"
     );
     setShowJobDetailsDrawer(false);
+    toast({
+      variant: "success",
+      title: "Application submitted!",
+      description: "We will review your information and get back to you soon.",
+      className: "bg-green-500 text-white",
+      duration: 3000,
+    });
   }
 
   return (
