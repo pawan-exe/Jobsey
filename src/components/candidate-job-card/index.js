@@ -40,7 +40,7 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications }) {
       toast({
         variant: "destructive",
         title: "You can apply max 5 jobs",
-        description: "Please opt for membership to apply more jobs",
+        description: "Please update your plan to apply more jobs",
       });
       return;
     } else if (
@@ -52,7 +52,7 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications }) {
       toast({
         variant: "destructive",
         title: "You can apply max 10 jobs",
-        description: "Please opt for membership to apply more jobs",
+        description: "Please update your plan to apply more jobs",
       });
       return;
     }

@@ -132,7 +132,7 @@ function Feed({ user, profileInfo, allFeedPosts }) {
                       className="h-80 w-full object-cover object-top transition duration-500 group-hover:scale-105"
                     />
                   </div>
-                  <div className="sm:p-2 sm:pl-0 sm:w-4/6">
+                  <div className="sm:p-2 sm:pl-0 sm:w-4/6 ">
                     <div className="flex items-center gap-2">
                       <Avatar className="w-7 h-7">
                         <AvatarImage src={feedPostItem?.profilePic} />
@@ -145,7 +145,7 @@ function Feed({ user, profileInfo, allFeedPosts }) {
                       </span>
                     </div>
 
-                    <h3 className="mb-6 mt-4 text-4xl font-bold text-gray-900">
+                    <h3 className="mb-6 mt-4 text-2xl text-gray-900">
                       {feedPostItem?.message}
                     </h3>
                     <div className="flex gap-5">
